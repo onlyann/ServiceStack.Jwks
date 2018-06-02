@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <RestoreAdditionalProjectSources>https://dotnet.myget.org/F/dotnet-core/api/v3/index.json</RestoreAdditionalProjectSources>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'== 'net45'">
+    <!-- Make .NET 4.5 reference assemblies available even on Linux -->
+    <FrameworkPathOverride>$(NuGetPackageRoot)microsoft.targetingpack.netframework.v4.5/1.0.1/lib/net45/</FrameworkPathOverride>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)'== 'net45'">
+      <!-- Make sure the reference assemblies are available -->
+      <PackageReference Include="Microsoft.TargetingPack.NETFramework.v4.5"
+                        Version="1.0.1" ExcludeAssets="All" PrivateAssets="All" />
+      <!-- The DLL case has changed between 4.5 and 4.6; this avoids a warning. -->
+      <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ServiceStack" Version="5.*" />
+  </ItemGroup>
+</Project>
