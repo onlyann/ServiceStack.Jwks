@@ -1,7 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
     <RestoreAdditionalProjectSources>https://dotnet.myget.org/F/dotnet-core/api/v3/index.json</RestoreAdditionalProjectSources>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Title>ServiceStack JSON Web Key Set plugin</Title>
+    <Authors>onlyann</Authors>
+    <Description>ServiceStack.JWKS is a plugin to consume or expose a JSON Web Key Set data structure when using JWT tokens.</Description>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/onlyann/ServiceStack.Jwks/master/license.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/onlyann/ServiceStack.Jwks</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/onlyann/servicestack.jwks.git</RepositoryUrl>
+    <PackageTags>ServiceStack;JWKS;JWT</PackageTags>
+    <IncludeSymbols>True</IncludeSymbols>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)'== 'net45'">
     <!-- Make .NET 4.5 reference assemblies available even on Linux -->
@@ -15,6 +26,6 @@
       <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ServiceStack" Version="5.*" />
+    <PackageReference Include="ServiceStack" Version="5.1.0" />
   </ItemGroup>
 </Project>
