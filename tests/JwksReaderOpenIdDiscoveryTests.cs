@@ -40,8 +40,17 @@ namespace ServiceStack.Jwks.Tests {
     }
 
     [TestFixture]
-    public class JwksReaderOpenIdDiscoveryTests : JwksReaderTests {
+    public class JwksReaderOpenIdDiscoveryTests : JwksReaderBaseTests {
 
         protected override TestServer CreateTestServer()=> WebHostUtils.CreateTestServer<AppHostOpenIdDiscoveryJwksReader>(configuration);
+
+        [Test]
+        public override void No_token_returns_401()=> base.No_token_returns_401();
+
+        [Test]
+        public override void Valid_jwt_is_accepted()=> base.Valid_jwt_is_accepted();
+
+        [Test]
+        public override void Invalid_jwt_is_rejected()=> base.Invalid_jwt_is_rejected();
     }
 }

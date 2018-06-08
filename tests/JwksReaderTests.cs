@@ -39,47 +39,16 @@ namespace ServiceStack.Jwks.Tests {
     }
 
     [TestFixture]
-    public class JwksReaderTests : BaseTests {
+    public class JwksReaderTests : JwksReaderBaseTests {
         protected override TestServer CreateTestServer()=> WebHostUtils.CreateTestServer<AppHostJwksReader>(configuration);
 
         [Test]
-        public void No_token_returns_401() {
-            Assert.That(
-                ()=> client.Send(new Hello()),
-                Throws.TypeOf<WebServiceException>()
-                .With.Matches<WebServiceException>(ex => ex.StatusCode == 401));
-        }
+        public override void No_token_returns_401()=> base.No_token_returns_401();
 
         [Test]
-        public void Valid_jwt_is_accepted() {
-            var token = CreateJwt(configuration["jwt.RS512.PrivateKeyXml"].ToPrivateRSAParameters());
-            client.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-            var response = client.Send(new Hello());
-            Assert.That(response.Result, Is.EqualTo("Hello, Test!"));
-        }
+        public override void Valid_jwt_is_accepted()=> base.Valid_jwt_is_accepted();
 
         [Test]
-        public void Invalid_jwt_is_rejected() {
-            var token = CreateJwt(RsaUtils.CreatePrivateKeyParams());
-            client.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-            Assert.That(
-                ()=> client.Send(new Hello()),
-                Throws.TypeOf<WebServiceException>()
-                .With.Matches<WebServiceException>(ex => ex.StatusCode == 401));
-        }
-
-        private string CreateJwt(RSAParameters privateKey) {
-            var header = JwtAuthProvider.CreateJwtHeader("RS512");
-            var payload = JwtAuthProvider.CreateJwtPayload(new AuthUserSession {
-                UserAuthId = "1",
-                    DisplayName = "Test",
-                    Email = "test@example.com"
-            }, "my-jwt", TimeSpan.FromDays(7));
-
-            return JwtAuthProvider.CreateJwt(header, payload,
-                data => RsaUtils.Authenticate(data, privateKey, "SHA512", RsaKeyLengths.Bit2048));
-        }
+        public override void Invalid_jwt_is_rejected()=> base.Invalid_jwt_is_rejected();
     }
 }
