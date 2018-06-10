@@ -28,6 +28,14 @@ namespace ServiceStack.Jwks {
             };
         }
 
+        public object Any(GetOpenIdDiscoveryDocument request) {
+            var jwtProvider = AuthenticateService.GetJwtAuthProvider();
+            return new OpenIdDiscoveryDocument {
+                JwksUri = new GetJsonWebKeySet().ToAbsoluteUri(Request),
+                    Issuer = jwtProvider.Issuer
+            };
+        }
+
         static JsonWebKey CreateJWKey(
             RSAParameters publicKey,
             string algorithm,

@@ -16,16 +16,16 @@ namespace ServiceStack.Jwks.Tests {
                 ()=> new AuthUserSession(),
                 new IAuthProvider[] { new JwtAuthProviderReader(AppSettings)});
 
-            var openIdDiscoveryUrl = "https://someserver/open_id_discovery_doc";
+            var openIdDiscoveryUrl = "https://server.example.com/open_id_discovery_doc";
 
             var stubClient = new JsonHttpClient();
             stubClient.ResultsFilter = (responseType, httpMethod, requestUri, request)=> {
                 if (requestUri == openIdDiscoveryUrl) {
-                    return File.ReadAllText("expected_openid_discovery_document.json").FromJson<OpenIdDiscoveryDocument>();
+                    return File.ReadAllText("content/sample_openid_discovery_document.json").FromJson<OpenIdDiscoveryDocument>();
                 }
 
                 if (requestUri == "https://server.example.com/jwks.json") {
-                    return File.ReadAllText("expected_jwks_RS512.json").FromJson<JsonWebKeySetResponse>();
+                    return File.ReadAllText("content/expected_jwks_RS512.json").FromJson<JsonWebKeySetResponse>();
                 }
                 return null;
             };

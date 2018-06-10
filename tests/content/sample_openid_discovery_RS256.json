@@ -1,0 +1,4 @@
+{
+    "jwks_uri": "content/expected_jwks_RS256.json",
+    "issuer": "https://server.example.com"
+}

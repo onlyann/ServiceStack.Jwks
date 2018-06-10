@@ -19,18 +19,18 @@ namespace ServiceStack.Jwks.Tests {
                 ()=> new AuthUserSession(),
                 new IAuthProvider[] { new JwtAuthProviderReader(AppSettings)});
 
-            var jwksUrl = "https://someserver/jwks";
+            var jwksUrl = "https://server.example.com/jwks";
 
             var stubClient = new JsonHttpClient();
             stubClient.ResultsFilter = (responseType, httpMethod, requestUri, request)=> {
                 if (requestUri == jwksUrl) {
-                    return File.ReadAllText("expected_jwks_RS512.json").FromJson<JsonWebKeySetResponse>();
+                    return File.ReadAllText("content/expected_jwks_RS512.json").FromJson<JsonWebKeySetResponse>();
                 }
                 return null;
             };
 
             authFeature.RegisterPlugins.Add(new JwksFeature() {
-                JwksUrl = "https://someserver/jwks",
+                JwksUrl = jwksUrl,
                     JwksClient = stubClient
             });
 

@@ -28,6 +28,7 @@ namespace ServiceStack.Jwks {
         protected virtual JsonWebKeySetResponse RetrieveKeySet() {
             if (!string.IsNullOrEmpty(OpenIdDiscoveryUrl)) {
                 var discoveryDoc = JwksClient.Get<OpenIdDiscoveryDocument>(OpenIdDiscoveryUrl);
+                JwtAuthProvider.Issuer = discoveryDoc.Issuer;
                 JwksUrl = discoveryDoc.JwksUri;
             }
 

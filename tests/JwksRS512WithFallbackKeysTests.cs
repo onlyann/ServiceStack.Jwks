@@ -40,7 +40,7 @@ namespace ServiceStack.Jwks.Tests {
 
             Assert.That(response.Keys, Has.Exactly(3).Items);
 
-            var expectedJwks = File.ReadAllText("expected_jwks_RS512.json").FromJson<JsonWebKeySetResponse>();
+            var expectedJwks = File.ReadAllText("content/expected_jwks_RS512.json").FromJson<JsonWebKeySetResponse>();
             foreach (var expectedKey in expectedJwks.Keys) {
                 var key = response.Keys.FirstOrDefault(x => x.KeyId == expectedKey.KeyId);
                 Assert.That(key.ToJson(), Is.EqualTo(expectedKey.ToJson()));

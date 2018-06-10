@@ -18,7 +18,8 @@ namespace ServiceStack.Jwks.Tests {
                 new IAuthProvider[] {
                     new JwtAuthProvider {
                         PrivateKeyXml = AppSettings.Get<string>("jwt.RS256.PrivateKeyXml"),
-                            HashAlgorithm = "RS256"
+                            HashAlgorithm = "RS256",
+                            Issuer = "https://server.example.com"
                     }
                 });
 
@@ -40,9 +41,17 @@ namespace ServiceStack.Jwks.Tests {
             Assert.That(response.Keys, Has.Exactly(1).Items);
             var key = response.Keys.First();
 
-            var expectedJwks = File.ReadAllText("expected_jwks_RS256.json").FromJson<JsonWebKeySetResponse>();
+            var expectedJwks = File.ReadAllText("content/expected_jwks_RS256.json").FromJson<JsonWebKeySetResponse>();
             var expectedKey = expectedJwks.Keys.First();
             Assert.That(key.ToJson(), Is.EqualTo(expectedKey.ToJson()));
+        }
+
+        [Test]
+        public void Jwks_returns_openid_discovery_document() {
+
+            var response = client.Send(new GetOpenIdDiscoveryDocument());
+            var expectedMetadata = File.ReadAllText("content/expected_openid_discovery_RS256.json").FromJson<OpenIdDiscoveryDocument>();
+            Assert.That(response.ToJson(), Is.EqualTo(expectedMetadata.ToJson()));
         }
     }
 }
