@@ -13,7 +13,7 @@ Potential use cases:
 
 Register `JwksFeature` in the `AuthFeature`:
 
-```
+```cs
 // existing Auth feature using the JwtAuthProvider
 var authFeature = new AuthFeature(...);
 
@@ -26,7 +26,7 @@ The Discovery document is now accessible at `/openid-config` and the JSON Web ke
 
 Register `JwksFeature` in the `AuthFeature`:
 
-```
+```cs
 // existing Auth feature using the JwtAuthProviderReader
 var authFeature = new AuthFeature(...);
 
@@ -38,7 +38,7 @@ authFeature.RegisterPlugins.Add(new JwksFeature() {
 
 ### Protected ASP.NET Core service
 
-```
+```cs
 public class StartUp {
     public void ConfigureServices(IServiceCollection services) {
         ...
