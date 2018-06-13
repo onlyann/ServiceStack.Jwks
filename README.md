@@ -1,6 +1,9 @@
 # ServiceStack.Jwks
 
-A ServiceStack v5 plugin to expose and consume [Json Web Key](https://tools.ietf.org/html/rfc7517) sets using a subset of the [OpenId discovery document](https://openid.net/specs/openid-connect-discovery-1_0.html).
+[![Build status](https://ci.appveyor.com/api/projects/status/4hfmc0b4fcq87b3y/branch/master?svg=true)](https://ci.appveyor.com/project/onlyann/servicestack-jwks/branch/master)
+[![Nuget](https://img.shields.io/nuget/v/ServiceStack.Jwks.svg)](https://www.nuget.org/packages/ServiceStack.Jwks/)
+
+A ServiceStack v5 plugin to expose and consume [Json Web Key](https://tools.ietf.org/html/rfc7517) sets using a subset of the [OpenID Connect discovery document](https://openid.net/specs/openid-connect-discovery-1_0.html).
 
 Potential use cases:
 -  simplify [JSON Web token](http://docs.servicestack.net/jwt-authprovider) key rotation between ServiceStack services
@@ -8,6 +11,11 @@ Potential use cases:
 -  protect an ASP.NET Core app with the [Microsoft.AspNetCore.Authentication.JwtBearer](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer/) middleware using the OpenID discovery document from a ServiceStack Authentication service.
 
 ## Getting Started
+
+Add the `ServiceStack.Jwks` Nuget package:
+```
+dotnet add package ServiceStack.Jwks --version 1.0.0
+```
 
 ### Authentication service
 
