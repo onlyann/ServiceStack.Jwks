@@ -71,3 +71,13 @@ public class StartUp {
     }
 }
 ```
+
+## Notes
+
+Supported algorithms are the Asymetric RSA algorithms (RS256, RS384, RS512).
+
+The metadata isn't technically valid according to [OpenID connect metadata specifications](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata).  
+ServiceStack isn't an OpenID provider and the metadata is only used to expose information about the `JWTAuthProvider`.
+
+   
+
