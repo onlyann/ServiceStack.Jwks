@@ -46,10 +46,8 @@ namespace ServiceStack.Jwks {
 
             if (JwtAuthProvider.RequireHashAlgorithm) {
                 // infer the algorithm if it is described by a key from the set
-                var algo = keySet.Keys.FirstOrDefault(x => !string.IsNullOrEmpty(x.Algorithm))? .Algorithm;
-                if (algo != null) {
-                    JwtAuthProvider.HashAlgorithm = algo;
-                }
+                var algo = keySet.Keys.FirstOrDefault(x => !string.IsNullOrEmpty(x.Algorithm))?.Algorithm;
+                JwtAuthProvider.HashAlgorithm = algo ?? "RS256";
             }
 
             var key = keySet.Keys.First();
